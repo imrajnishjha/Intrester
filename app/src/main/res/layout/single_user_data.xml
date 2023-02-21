@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:cardCornerRadius="7dp"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/userDataImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button_shape"
+                android:src="@drawable/wormos_logo"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                />
+
+            <TextView
+                android:id="@+id/userDataName"
+                android:layout_toEndOf="@+id/userDataImage"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:text="Aman Tiwari"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:fontFamily="@font/poppins_semi_bold"/>
+
+            <TextView
+                android:id="@+id/userDataPmAmount"
+                android:layout_below="@+id/userDataName"
+                android:layout_toEndOf="@+id/userDataImage"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_height="wrap_content"
+                android:text="6000/month"
+                android:fontFamily="@font/poppins_regular"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="200"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/dark_teal"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:background="@drawable/round_btn"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

@@ -4,11 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
+
+
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:id="@+id/background_teal"
         android:background="@color/dark_teal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,24 +39,319 @@
                 app:layout_constraintTop_toTopOf="@id/dashboard_constraint"
                 app:layout_constraintStart_toStartOf="@id/dashboard_constraint"
                 android:src="@drawable/rupee_green"
-                android:layout_margin="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
                 tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/dashboard_month_collection"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="45dp"
                 android:textColor="#B5E61D"
                 android:gravity="center|top"
                 android:textStyle="bold"
-                android:paddingtop="3dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:text="0"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/dashboard_constraint"
+                app:layout_constraintTop_toBottomOf="@id/dashboard_month_collection"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="20dp"
+                android:id="@+id/dashboard_month_collection_text"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/text_grey"
+                android:gravity="center|top"
+                android:textStyle="bold"
+                android:textSize="9sp"
+                android:text="Month Collection"/>
+
+            <TextView
+                android:layout_width="2dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toStartOf="@id/dashboard_view_report_text"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/dashboard_constarint_sepration_line"
+                android:background="@color/text_grey"
+                app:layout_constraintStart_toEndOf="@id/dashboard_month_collection"
+                app:layout_constraintTop_toTopOf="@id/dashboard_constraint"
+                app:layout_constraintBottom_toBottomOf="@id/dashboard_constraint"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:layout_constraintTop_toTopOf="@id/dashboard_constraint"
+                app:layout_constraintStart_toEndOf="@id/dashboard_constarint_sepration_line"
+                android:src="@drawable/rupee_green"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dashboard_day_collection"
+                app:layout_constraintStart_toEndOf="@id/dashboard_constarint_sepration_line"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="35dp"
+                android:textColor="#B5E61D"
+                android:gravity="center|top"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="0"/>
+
+            <TextView
+                android:id="@+id/dashboard_day_collection_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center|top"
+                android:text="Day Collection"
+                android:textColor="@color/text_grey"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/dashboard_constraint"
+                app:layout_constraintStart_toEndOf="@id/dashboard_constarint_sepration_line"
+                app:layout_constraintTop_toBottomOf="@id/dashboard_day_collection" />
+
+            <TextView
+                android:id="@+id/dashboard_view_report_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center|top"
+                android:layout_marginEnd="15dp"
+                android:text="View\nReport"
+                android:textColor="@color/dark_teal"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/dashboard_constraint"
+                app:layout_constraintEnd_toStartOf="@id/dashboard_report_arrow"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/baseline_arrow_forward"
+                android:id="@+id/dashboard_report_arrow"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/background_teal"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/scrollView">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:id="@+id/dashboard_client_database_Cv"
+            android:layout_margin="20dp"
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="#CCE6FF"
+            android:outlineSpotShadowColor="@color/black"
+            android:outlineAmbientShadowColor="@color/black"
+            android:elevation="3dp"
+            app:cardElevation="3dp"
+            app:layout_constraintTop_toTopOf="@id/scrollView">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/dashboard_client_database_Image"
+                android:layout_gravity="center"
+                android:src="@drawable/rupee_green"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_grey"
+                android:labelFor="@id/dashboard_client_database_Image"
+                android:text="Client Database"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"/>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:id="@+id/dashboard_due_logbook_Cv"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:cardBackgroundColor="#FFDC98"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="20dp"
+            android:outlineSpotShadowColor="@color/black"
+            android:outlineAmbientShadowColor="@color/black"
+            android:elevation="3dp"
+            app:cardElevation="3dp"
+            app:layout_constraintTop_toBottomOf="@id/dashboard_client_database_Cv">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/dashboard_due_logbook_Image"
+                android:layout_gravity="center"
+                android:src="@drawable/rupee_green"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_grey"
+                android:labelFor="@id/dashboard_client_database_Image"
+                android:text="Due Logbook"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"/>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:id="@+id/dashboard_deposite_logbook_Cv"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="#FFD7D7"
+            android:outlineSpotShadowColor="@color/black"
+            android:outlineAmbientShadowColor="@color/black"
+            android:elevation="3dp"
+            app:cardElevation="3dp"
+            app:layout_constraintTop_toBottomOf="@id/dashboard_due_logbook_Cv">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/dashboard_deposite_logbook_Image"
+                android:layout_gravity="center"
+                android:src="@drawable/rupee_green"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_grey"
+                android:labelFor="@id/dashboard_client_database_Image"
+                android:text="Deposite Logbook"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"/>
+
+
+        </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/dashboard_entry_logbook_navigation"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/dark_teal"
+        android:id="@+id/dashboard_account_navigation">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_margin="15dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/account"
+                android:contentDescription="account" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:textColor="@color/white"
+                android:text="Account"
+                android:fontFamily="@font/poppins_regular"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"/>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/dashboard_account_navigation"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/dark_teal"
+        android:id="@+id/dashboard_entry_logbook_navigation">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_margin="15dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/account"
+                android:contentDescription="account" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:textColor="@color/white"
+                android:text="EntryLog"
+                android:fontFamily="@font/poppins_regular"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"/>
+
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 

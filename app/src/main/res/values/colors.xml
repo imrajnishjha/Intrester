@@ -6,6 +6,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="light_black">#424242</color>
     <color name="white">#FFFFFFFF</color>
     <color name="different_white">#f5f5f5</color>
     <color name="different_black">#212121</color>
@@ -21,4 +22,6 @@
     <color name="ucrop_color_statusbar">#8338ec</color>
     <color name="ucrop_color_widget_active">#e76f51</color>
     <color name="button_blue">#3C87F8</color>
+    <color name="button_light">#ECF9F8</color>
+    <color name="button_pink">#8C334E</color>
 </resources>

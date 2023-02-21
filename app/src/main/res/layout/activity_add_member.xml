@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:padding="5dp"
+        android:text="| New Member"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="@color/light_teal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/round_edt"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:hint="Premimum Plan"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:background="#c0c0c0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/edit"
+        android:layout_margin="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <EditText
+        android:id="@+id/addMemberName"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@drawable/round_edt"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Member Name"
+        android:padding="5dp"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/addMemberAB"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <Spinner
+        android:id="@+id/addMemberAB"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toEndOf="@+id/addMemberName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"/>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:background="#c0c0c0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addMemberName" />
+
+    <ImageView
+        android:id="@+id/img2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/edit"
+        android:layout_margin="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <EditText
+        android:id="@+id/addMemberAccount"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@drawable/round_edt"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Account No"
+        android:padding="5dp"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/addMemberOption"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <Spinner
+        android:id="@id/addMemberOption"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toEndOf="@+id/addMemberAccount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2"/>
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:background="#c0c0c0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addMemberAccount" />
+
+    <EditText
+        android:id="@+id/addMemberDOO"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@drawable/round_edt"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Date Of Opening"
+        android:padding="5dp"
+        android:drawableStart="@drawable/calender_icon"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+    <EditText
+        android:id="@+id/addMemberDOM"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@drawable/round_edt"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Date Of Maturity"
+        android:drawableStart="@drawable/calender_icon"
+        android:padding="5dp"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/addMemberDOO"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+    <EditText
+        android:id="@+id/addMemberAC"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@drawable/round_edt"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Amount Collected"
+        android:padding="5dp"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addMemberDOO" />
+
+    <EditText
+        android:id="@+id/addMemberAR"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@drawable/round_edt"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Amount remaining"
+        android:padding="5dp"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/addMemberAC"
+        app:layout_constraintTop_toBottomOf="@+id/addMemberDOM" />
+
+    <EditText
+        android:id="@+id/addMemberAddress"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@drawable/round_edt"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Address"
+        android:drawableStart="@drawable/location_icon"
+        android:padding="5dp"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addMemberAC" />
+
+    <EditText
+        android:id="@+id/addMemberPhone"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@drawable/round_edt"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Phone"
+        android:padding="5dp"
+        android:drawableStart="@drawable/phone_icon"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addMemberAddress" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="16dp"
+        android:background="#c0c0c0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addMemberPhone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Member"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:textColor="@color/light_teal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/view4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
