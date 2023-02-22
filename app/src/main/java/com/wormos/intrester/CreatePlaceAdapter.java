@@ -35,7 +35,7 @@ public class CreatePlaceAdapter extends FirebaseRecyclerAdapter<CreatePlaceModel
                 .error(R.drawable.wormos_logo)
                 .into(holder.placeImage);
         holder.view.setOnClickListener(v->{
-            v.getContext().startActivity(new Intent(v.getContext(),UserData.class));
+            v.getContext().startActivity(new Intent(v.getContext(),UserData.class).putExtra("id",getRef(position).getKey()));
         });
 
     }
