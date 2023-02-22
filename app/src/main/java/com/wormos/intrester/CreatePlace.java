@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.database.DatabaseReference;
@@ -35,9 +37,10 @@ public class CreatePlace extends AppCompatActivity {
 
     AppCompatButton createPlaceBtn;
     RecyclerView placeRv;
+    CreatePlaceAdapter createPlaceAdapter;
+    FirebaseRecyclerOptions<CreatePlaceModel> options;
     TextView addPlaceBtn;
     Uri placeUri;
-
     EditText placeName, placeId;
     ImageView placeIcon;
     private final DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
@@ -51,6 +54,14 @@ public class CreatePlace extends AppCompatActivity {
         createPlaceBtn = findViewById(R.id.create_place_btn);
         placeRv = findViewById(R.id.create_place_Rv);
 
+        //RecycleView Setup
+        options = new FirebaseRecyclerOptions.Builder<CreatePlaceModel>()
+                .setQuery(FirebaseDatabase.getInstance().getReference("Place"), CreatePlaceModel.class)
+                .build();
+        createPlaceAdapter = new CreatePlaceAdapter(options);
+        placeRv.setAdapter(createPlaceAdapter);
+
+        //Create Place functionality
         createPlaceBtn.setOnClickListener(view->{
             BottomSheetDialog bottomSheet = new BottomSheetDialog(CreatePlace.this);
             bottomSheet.setContentView(R.layout.activity_add_new_place);
@@ -97,7 +108,7 @@ public class CreatePlace extends AppCompatActivity {
                     alertDialogImg.dismiss();
                 });
             });
-
+            Log.d("ucy", "onreate: "+dbRef+"\n"+storageRef);
             //send place data to firebase
             addPlaceBtn.setOnClickListener(v->{
                 if(placeName.getText().toString().isBlank()){
@@ -112,6 +123,7 @@ public class CreatePlace extends AppCompatActivity {
                     storageRef.putFile(placeUri).addOnSuccessListener(taskSnapshot ->
                             storageRef.getDownloadUrl()
                                     .addOnSuccessListener(uri -> {
+                                        Log.d("ucy", "onCreate: "+dbRef+"\n"+storageRef);
                                         HashMap<String,Object> placeMap = new HashMap<>();
                                         placeMap.put("place",placeName.getText().toString());
                                         placeMap.put("purl",uri.toString());
@@ -146,5 +158,11 @@ public class CreatePlace extends AppCompatActivity {
             placeIcon.setImageURI(placeUri);
 
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        createPlaceAdapter.startListening();
     }
 }
