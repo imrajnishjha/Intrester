@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="20dp"
-    android:layout_marginEnd="-10dp"
+    android:layout_marginBottom="-15dp"
     app:cardBackgroundColor="@color/text_grey"
     tools:context=".addNewPlace">
 
@@ -22,7 +22,7 @@
 
             <TextView
                 android:layout_width="3dp"
-                android:layout_height="20dp"
+                android:layout_height="24dp"
                 android:background="@color/dark_teal"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
@@ -32,9 +32,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="New Place"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:fontFamily="@font/poppins_semi_bold"
-                android:layout_margin="10dp"
+                android:layout_margin="13dp"
                 android:textColor="@color/dark_teal"/>
 
         </LinearLayout>
@@ -47,22 +47,26 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:src="@drawable/pen"/>
 
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/create_place_name"
                 android:hint="New Place"
+                android:background="#BBF5F1"
+                android:paddingTop="5dp"
+                android:paddingBottom="10dp"
                 android:textColorHint="@color/text_grey"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppins_regular"
                 android:layout_margin="10dp"
-                android:textColor="@color/text_grey"/>
+                android:textColor="@color/dark_teal" />
 
         </LinearLayout>
 
@@ -74,22 +78,27 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/create_place_image"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:src="@drawable/pen"/>
 
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Place Icon"
+                android:hint="Place Id"
                 android:textSize="14sp"
-                android:focusable="false"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:textColorHint="@color/text_grey"
+                android:background="#BBF5F1"
+                android:id="@+id/create_place_image_text"
                 android:fontFamily="@font/poppins_regular"
                 android:layout_margin="10dp"
-                android:textColor="@color/text_grey"/>
+                android:textColor="@color/dark_teal"/>
 
         </LinearLayout>
 
@@ -99,8 +108,9 @@
             android:text="Create Place"
             android:textSize="16sp"
             android:gravity="center"
+            android:id="@+id/add_place_btn"
             android:paddingTop="10dp"
-            android:paddingBottom="15dp"
+            android:paddingBottom="40dp"
             android:layout_marginTop="1dp"
             android:fontFamily="@font/poppins_semi_bold"
             android:textColor="@color/dark_teal"

@@ -2,6 +2,8 @@ package com.wormos.intrester;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class UserData extends AppCompatActivity {
     Button btn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,7 @@ public class UserData extends AppCompatActivity {
             public void onClick(View v) {
                 BottomSheetDialog bottomSheet = new BottomSheetDialog(UserData.this);
                 bottomSheet.setContentView(R.layout.activity_add_member);
+                bottomSheet.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 bottomSheet.show();
             }
         });
