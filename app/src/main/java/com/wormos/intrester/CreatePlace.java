@@ -6,6 +6,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+
 public class CreatePlace extends AppCompatActivity {
 
     AppCompatButton createPlaceBtn;
@@ -16,6 +18,10 @@ public class CreatePlace extends AppCompatActivity {
         setContentView(R.layout.activity_create_place);
 
         createPlaceBtn = findViewById(R.id.create_place_btn);
-        createPlaceBtn.setOnClickListener(view -> startActivity(new Intent(this,addMember.class)));
+        createPlaceBtn.setOnClickListener(view->{
+            BottomSheetDialog bottomSheet = new BottomSheetDialog(CreatePlace.this);
+            bottomSheet.setContentView(R.layout.activity_add_new_place);
+            bottomSheet.show();
+        });
     }
 }
