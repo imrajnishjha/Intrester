@@ -286,7 +286,7 @@
         app:layout_constraintEnd_toStartOf="@id/dashboard_entry_logbook_navigation"
         app:cardElevation="5dp"
         app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="@color/dark_teal"
+        app:cardBackgroundColor="@color/light_teal"
         android:id="@+id/dashboard_account_navigation">
 
         <LinearLayout
@@ -325,7 +325,7 @@
         app:cardElevation="5dp"
         app:cardCornerRadius="10dp"
         android:layout_marginBottom="10dp"
-        app:cardBackgroundColor="@color/dark_teal"
+        app:cardBackgroundColor="@color/light_teal"
         android:id="@+id/dashboard_entry_logbook_navigation">
 
         <LinearLayout

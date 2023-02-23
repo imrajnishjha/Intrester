@@ -3,6 +3,7 @@ package com.wormos.intrester;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
@@ -55,11 +56,15 @@ public class CreatePlace extends AppCompatActivity {
         placeRv = findViewById(R.id.create_place_Rv);
 
         //RecycleView Setup
+        placeRv.setLayoutManager(new LinearLayoutManager(this));
         options = new FirebaseRecyclerOptions.Builder<CreatePlaceModel>()
                 .setQuery(FirebaseDatabase.getInstance().getReference("Place"), CreatePlaceModel.class)
                 .build();
+
         createPlaceAdapter = new CreatePlaceAdapter(options);
         placeRv.setAdapter(createPlaceAdapter);
+        createPlaceAdapter.startListening();
+        Log.d("ucl", "onCreate: "+createPlaceAdapter.getItemCount());
 
         //Create Place functionality
         createPlaceBtn.setOnClickListener(view->{

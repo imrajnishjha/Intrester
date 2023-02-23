@@ -1,11 +1,13 @@
 package com.wormos.intrester;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +31,7 @@ public class CreatePlaceAdapter extends FirebaseRecyclerAdapter<CreatePlaceModel
 
     @Override
     protected void onBindViewHolder(@NonNull placeViewHolder holder, int position, @NonNull CreatePlaceModel model) {
+        Log.d("ucl", "onBindViewHolder: ");
         holder.placeName.setText(model.getPlace());
         Glide.with(holder.placeImage.getContext())
                 .load(model.getPurl())
