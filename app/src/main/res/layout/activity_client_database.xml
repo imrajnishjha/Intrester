@@ -3,12 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="match_parent"
-    tools:context=".UserData">
+    tools:context=".clientDatabase">
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:id="@+id/client_database_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/baseline_arrow_back_arrow"/>
 
     <EditText
-        android:id="@+id/userDataSearchBar"
+        android:id="@+id/client_database_search"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:drawableStart="@drawable/search_icon"
@@ -17,16 +26,16 @@
         android:backgroundTint="#F4F6F6"
         android:layout_marginTop="20dp"
         android:layout_marginStart="16dp"
+        android:hint=""
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/client_database_back"
         android:autofillHints="text"
         android:inputType="textPersonName" />
 
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/member_RV"
+        android:id="@+id/client_database_RV"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -36,20 +45,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userDataSearchBar"
+        app:layout_constraintTop_toBottomOf="@+id/client_database_search"
         tools:listitem="@layout/single_user_data" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/userDataAddBtn"
-        android:layout_margin="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_shape"
-        android:fontFamily="@font/poppins_regular"
-        android:text="Add Member"
-        android:backgroundTint="#8C334E"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
