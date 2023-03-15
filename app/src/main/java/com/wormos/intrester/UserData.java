@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -32,12 +33,10 @@ public class UserData extends AppCompatActivity {
     EditText amPremiumPlan, amMemberName, amAccNo, amAmountCollected, amAmountRemaining, amAddress, amPhone;
     Button btn;
     Spinner spinner;
-
     Boolean plan = false;
     String amPlan = "B", dur="";
     int memberCount = 0;
     String placeId;
-
     RecyclerView memberRv;
     addMemberViewHolder addMemberHolder;
     FirebaseRecyclerOptions<addMemberModal> options;
@@ -53,6 +52,10 @@ public class UserData extends AppCompatActivity {
 
         btn = (Button) findViewById(R.id.userDataAddBtn);
         extras = getIntent().getExtras();
+        if(extras!=null){
+            placeId = extras.getString("id");
+        }
+        Log.d("ukle", "onCreate: "+placeId);
 
         //RecycleView Setup
         memberRv = findViewById(R.id.member_RV);
@@ -76,7 +79,7 @@ public class UserData extends AppCompatActivity {
     private void fetchFirebase() {
         try{
             options = new FirebaseRecyclerOptions.Builder<addMemberModal>()
-                    .setQuery(FirebaseDatabase.getInstance().getReference("MemberInfo"), addMemberModal.class)
+                    .setQuery(FirebaseDatabase.getInstance().getReference("MemberByPlace").child(placeId), addMemberModal.class)
                     .build();
 
             addMemberHolder = new addMemberViewHolder(options);

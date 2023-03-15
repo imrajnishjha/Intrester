@@ -41,11 +41,10 @@ public class CreatePlace extends AppCompatActivity {
     CreatePlaceAdapter createPlaceAdapter;
     FirebaseRecyclerOptions<CreatePlaceModel> options;
     TextView addPlaceBtn;
-    Uri placeUri;
     EditText placeName, placeId;
     ImageView placeIcon;
     private final DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
-    static StorageReference storageRef = FirebaseStorage.getInstance().getReference("Place Picture/");
+   // static StorageReference storageRef = FirebaseStorage.getInstance().getReference("Place Picture/");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +60,9 @@ public class CreatePlace extends AppCompatActivity {
                 .setQuery(FirebaseDatabase.getInstance().getReference("Place"), CreatePlaceModel.class)
                 .build();
 
-        createPlaceAdapter = new CreatePlaceAdapter(options);
+        createPlaceAdapter = new CreatePlaceAdapter(options,"create");
         placeRv.setAdapter(createPlaceAdapter);
         createPlaceAdapter.startListening();
-        Log.d("ucl", "onCreate: "+createPlaceAdapter.getItemCount());
 
         //Create Place functionality
         createPlaceBtn.setOnClickListener(view->{
@@ -78,42 +76,43 @@ public class CreatePlace extends AppCompatActivity {
             addPlaceBtn = bottomSheet.findViewById(R.id.add_place_btn);
 
             //get image from gallery
-            placeIcon.setOnClickListener(v->{
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                LayoutInflater layoutInflater = getLayoutInflater();
-                View pickImgview = layoutInflater.inflate(R.layout.image_picker_item, null);
-                builder.setCancelable(true);
-                builder.setView(pickImgview);
-                AlertDialog alertDialogImg = builder.create();
-                Window window = alertDialogImg.getWindow();
-                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                WindowManager.LayoutParams wlp = window.getAttributes();
-                wlp.gravity = Gravity.BOTTOM;
-                wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
-                alertDialogImg.show();
-                window.setAttributes(wlp);
+//            placeIcon.setOnClickListener(v->{
+//                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+//                LayoutInflater layoutInflater = getLayoutInflater();
+//                View pickImgview = layoutInflater.inflate(R.layout.image_picker_item, null);
+//                builder.setCancelable(true);
+//                builder.setView(pickImgview);
+//                AlertDialog alertDialogImg = builder.create();
+//                Window window = alertDialogImg.getWindow();
+//                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                WindowManager.LayoutParams wlp = window.getAttributes();
+//                wlp.gravity = Gravity.BOTTOM;
+//                wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+//                alertDialogImg.show();
+//                window.setAttributes(wlp);
+//
+//                CardView cameraCardView = pickImgview.findViewById(R.id.chooseCamera);
+//                CardView galleryCardView = pickImgview.findViewById(R.id.chooseGallery);
+//
+//                galleryCardView.setOnClickListener(view1 -> {
+//                    ImagePicker.with(this)
+//                            .galleryOnly()
+//                            .crop(1f, 1f)
+//                            .maxResultSize(720, 1080)
+//                            .start(0);
+//                    alertDialogImg.dismiss();
+//                });
+//                cameraCardView.setOnClickListener(view1 -> {
+//                    ImagePicker.with(this)
+//                            .cameraOnly()
+//                            .crop(1f, 1f)
+//                            .maxResultSize(720, 1080)
+//                            .start(1);
+//                    alertDialogImg.dismiss();
+//                });
+//            });
 
-                CardView cameraCardView = pickImgview.findViewById(R.id.chooseCamera);
-                CardView galleryCardView = pickImgview.findViewById(R.id.chooseGallery);
 
-                galleryCardView.setOnClickListener(view1 -> {
-                    ImagePicker.with(this)
-                            .galleryOnly()
-                            .crop(1f, 1f)
-                            .maxResultSize(720, 1080)
-                            .start(0);
-                    alertDialogImg.dismiss();
-                });
-                cameraCardView.setOnClickListener(view1 -> {
-                    ImagePicker.with(this)
-                            .cameraOnly()
-                            .crop(1f, 1f)
-                            .maxResultSize(720, 1080)
-                            .start(1);
-                    alertDialogImg.dismiss();
-                });
-            });
-            Log.d("ucy", "onreate: "+dbRef+"\n"+storageRef);
             //send place data to firebase
             addPlaceBtn.setOnClickListener(v->{
                 if(placeName.getText().toString().isBlank()){
@@ -122,25 +121,17 @@ public class CreatePlace extends AppCompatActivity {
                 } else if(placeId.getText().toString().isBlank()){
                     placeId.setError("Enter the name");
                     placeId.requestFocus();
-                }else if(placeUri==null){
-                    Toast.makeText(getApplicationContext(), "Please choose place image", Toast.LENGTH_SHORT).show();
                 } else{
-                    storageRef.putFile(placeUri).addOnSuccessListener(taskSnapshot ->
-                            storageRef.getDownloadUrl()
-                                    .addOnSuccessListener(uri -> {
-                                        Log.d("ucy", "onCreate: "+dbRef+"\n"+storageRef);
-                                        HashMap<String,Object> placeMap = new HashMap<>();
-                                        placeMap.put("place",placeName.getText().toString());
-                                        placeMap.put("purl",uri.toString());
-                                        dbRef.child("Place").child(placeId.getText().toString()).updateChildren(placeMap)
-                                                .addOnCompleteListener(task->{
-                                                    if(task.isSuccessful()){
-                                                        bottomSheet.dismiss();
-                                                    } else {
-                                                        Toast.makeText(getApplicationContext(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
-                                    }));
+                    HashMap<String,Object> placeMap = new HashMap<>();
+                    placeMap.put("place",placeName.getText().toString());
+                    dbRef.child("Place").child(placeId.getText().toString()).updateChildren(placeMap)
+                            .addOnCompleteListener(task->{
+                                if(task.isSuccessful()){
+                                    bottomSheet.dismiss();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                 }
 
 
@@ -153,17 +144,17 @@ public class CreatePlace extends AppCompatActivity {
 
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == 0) {
-            placeUri = data.getData();
-            placeIcon.setImageURI(placeUri);
-        } else if (resultCode == RESULT_OK && requestCode == 1) {
-            placeUri = data.getData();
-            placeIcon.setImageURI(placeUri);
-
-        }
-    }
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode == RESULT_OK && requestCode == 0) {
+//            placeUri = data.getData();
+//            placeIcon.setImageURI(placeUri);
+//        } else if (resultCode == RESULT_OK && requestCode == 1) {
+//            placeUri = data.getData();
+//            placeIcon.setImageURI(placeUri);
+//
+//        }
+//    }
 
     @Override
     protected void onStart() {

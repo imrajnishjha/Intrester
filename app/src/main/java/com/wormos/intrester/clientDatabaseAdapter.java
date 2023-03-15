@@ -36,7 +36,7 @@ public class clientDatabaseAdapter extends FirebaseRecyclerAdapter<clientDatabas
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.getContext().startActivity(new Intent(v.getContext(),UserData.class).putExtra("id",getRef(position).getKey()));
+                v.getContext().startActivity(new Intent(v.getContext(),UserData.class).putExtra("id",getRef(holder.getAbsoluteAdapterPosition()).getKey()));
             }
         });
 //        holder.icon.setText(firstLetter.toUpperCase());

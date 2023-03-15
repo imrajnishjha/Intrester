@@ -21,16 +21,22 @@
             android:layout_marginBottom="10dp"
             android:layout_marginStart="6dp"
             android:id="@+id/place_image_cv"
-            app:cardCornerRadius="10dp"
+            app:cardCornerRadius="7dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <TextView
+                android:id="@+id/placeIcon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/place_image"
-                android:src="@drawable/rupee_green"/>
+                android:text="A"
+                android:layout_weight="10"
+                android:textSize="16sp"
+                android:background="@color/button_light"
+                android:gravity="center"
+                android:textColor="@color/light_teal"
+                android:fontFamily="@font/poppins_semi_bold"/>
 
         </androidx.cardview.widget.CardView>
 

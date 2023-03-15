@@ -5,20 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".clientDatabase">
-
-    <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:id="@+id/client_database_back"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="20dp"
-        android:src="@drawable/baseline_arrow_back_arrow"/>
+    tools:context=".DepositLogBook">
 
     <EditText
-        android:id="@+id/client_database_search"
+        android:id="@+id/depositLogBookSearchBar"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:drawableStart="@drawable/search_icon"
@@ -27,16 +17,26 @@
         android:backgroundTint="#F4F6F6"
         android:layout_marginTop="20dp"
         android:layout_marginStart="16dp"
-        android:hint=""
         android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/depositLogBookCalender"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/client_database_back"
+        app:layout_constraintTop_toTopOf="parent"
         android:autofillHints="text"
         android:inputType="textPersonName" />
 
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/depositLogBookCalender"
+        android:src="@drawable/calender"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/depositLogBookSearchBar"
+        app:layout_constraintBottom_toBottomOf="@id/depositLogBookSearchBar"
+        android:layout_marginEnd="16dp"/>
+
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/client_database_RV"
+        android:id="@+id/depositLogBook_RV"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -46,7 +46,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/client_database_search"
-        tools:listitem="@layout/single_user_data" />
+        app:layout_constraintTop_toBottomOf="@+id/depositLogBookSearchBar"
+        tools:listitem="@layout/due_status_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

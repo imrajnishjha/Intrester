@@ -9,7 +9,7 @@ import android.os.Bundle;
 public class MainActivity extends AppCompatActivity {
 
     CardView entryLog;
-    CardView clientDatabase;
+    CardView clientDatabase,depositLogPlace,dueLogBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +21,11 @@ public class MainActivity extends AppCompatActivity {
         clientDatabase = findViewById(R.id.dashboard_client_database_Cv);
         clientDatabase.setOnClickListener(view-> startActivity(new Intent(this,  clientDatabase.class)));
 
+        depositLogPlace = findViewById(R.id.dashboard_deposite_logbook_Cv);
+        depositLogPlace.setOnClickListener(view -> startActivity(new Intent(this,DepositLogPlace.class)));
+
+        dueLogBook = findViewById(R.id.dashboard_due_logbook_Cv);
+        dueLogBook.setOnClickListener(view -> startActivity(new Intent(this,DueLogBook.class)));
 
     }
 }

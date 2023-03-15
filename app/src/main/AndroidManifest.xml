@@ -12,6 +12,15 @@
         android:theme="@style/Theme.Intrester"
         tools:targetApi="31">
         <activity
+            android:name=".DueLogBook"
+            android:exported="false" />
+        <activity
+            android:name=".DepositLogPlace"
+            android:exported="false" />
+        <activity
+            android:name=".DepositLogBook"
+            android:exported="false" />
+        <activity
             android:name=".clientDatabase"
             android:exported="false" />
         <activity

@@ -25,20 +25,28 @@ public class CreatePlaceAdapter extends FirebaseRecyclerAdapter<CreatePlaceModel
      *
      * @param options
      */
-    public CreatePlaceAdapter(@NonNull FirebaseRecyclerOptions<CreatePlaceModel> options) {
+    String Due;
+    public CreatePlaceAdapter(@NonNull FirebaseRecyclerOptions<CreatePlaceModel> options,String Due) {
         super(options);
+        this.Due = Due;
     }
 
     @Override
     protected void onBindViewHolder(@NonNull placeViewHolder holder, int position, @NonNull CreatePlaceModel model) {
-        Log.d("ucl", "onBindViewHolder: ");
+        Log.d("ucl", "onBindViewHolder: "+Due);
         holder.placeName.setText(model.getPlace());
-        Glide.with(holder.placeImage.getContext())
-                .load(model.getPurl())
-                .error(R.drawable.wormos_logo)
-                .into(holder.placeImage);
+//        Glide.with(holder.placeImage.getContext())
+//                .load(model.getPurl())
+//                .error(R.drawable.wormos_logo)
+//                .into(holder.placeImage);
+
+        String firstLetter = String.valueOf(model.getPlace().charAt(0));
+        holder.placeImage.setText(firstLetter.toUpperCase());
+
+
         holder.view.setOnClickListener(v->{
-            v.getContext().startActivity(new Intent(v.getContext(),UserData.class).putExtra("id",getRef(position).getKey()));
+            if(Due.equals("due")) v.getContext().startActivity(new Intent(v.getContext(),DepositLogBook.class).putExtra("id",getRef(position).getKey()));
+            else v.getContext().startActivity(new Intent(v.getContext(),UserData.class).putExtra("id",getRef(position).getKey()));
         });
 
     }
@@ -52,7 +60,7 @@ public class CreatePlaceAdapter extends FirebaseRecyclerAdapter<CreatePlaceModel
 
     static class placeViewHolder extends RecyclerView.ViewHolder{
          TextView placeName;
-         ImageView placeImage;
+         TextView placeImage;
          View view;
 
 
@@ -60,7 +68,7 @@ public class CreatePlaceAdapter extends FirebaseRecyclerAdapter<CreatePlaceModel
             super(itemView);
             view = itemView;
             placeName= itemView.findViewById(R.id.place_name);
-            placeImage= itemView.findViewById(R.id.place_image);
+            placeImage= itemView.findViewById(R.id.placeIcon);
         }
     }
 }
