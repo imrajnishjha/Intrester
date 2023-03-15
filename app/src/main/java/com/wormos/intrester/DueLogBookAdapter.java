@@ -125,6 +125,8 @@ public class DueLogBookAdapter extends FirebaseRecyclerAdapter<addMemberModal , 
                         dbRef.child(infoDate).child(placeId).updateChildren(paidMap).addOnSuccessListener(success->{
                             holder.dueStatus.setBackgroundResource(R.drawable.round_btn_green);
                             holder.dueStatus.setText("Paid");
+                            paymentCollection(model.getPremiumPlan());
+                            paymentPlaceCollection(model.getPremiumPlan());
                             alertDialogImg.dismiss();
                         });
                     } else {
@@ -132,6 +134,8 @@ public class DueLogBookAdapter extends FirebaseRecyclerAdapter<addMemberModal , 
                                 .removeValue().addOnSuccessListener(sucess->{
                                     holder.dueStatus.setBackgroundResource(R.drawable.round_btn);
                                     holder.dueStatus.setText("Due");
+                                    deletePaymentCollection(model.getPremiumPlan());
+                                    deletePaymentPlaceCollection(model.getPremiumPlan());
                                     alertDialogImg.dismiss();
                                 });
                     }
@@ -162,5 +166,209 @@ public class DueLogBookAdapter extends FirebaseRecyclerAdapter<addMemberModal , 
             dueStatus = itemView.findViewById(R.id.userDueInfo);
             icon = itemView.findViewById(R.id.userIcon);
         }
+    }
+
+    public void paymentCollection(String amount){
+        long intAmount = Long.parseLong(amount);
+        DatabaseReference collectionRef = FirebaseDatabase.getInstance().getReference().child("Collection");
+
+        //Daily Payment
+        collectionRef.child(infoDate.substring(6)).child(infoDate.substring(3,5)).child(infoDate)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        HashMap<String,Object> updatePaymentMap = new HashMap<>();
+                        if(snapshot.exists()){
+                            Long currentDailyAmount = Long.valueOf(Objects.requireNonNull(snapshot.getValue()).toString());
+                            updatePaymentMap.put(infoDate,currentDailyAmount+intAmount);
+
+                        } else {
+                            Long currentDailyAmount= Long.valueOf(0);
+                            updatePaymentMap.put(infoDate,currentDailyAmount+intAmount);
+                        }
+                        collectionRef.child(infoDate.substring(6)).child(infoDate.substring(3,5)).updateChildren(updatePaymentMap);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+        //Monthly Payment
+        collectionRef.child(infoDate.substring(6)).child(infoDate.substring(3,5)).child("Monthly Amount")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        HashMap<String,Object> updatePaymentMap = new HashMap<>();
+                        Log.d("tiit", "onDataChange: ");
+                        if(snapshot.exists()){
+                            Long currentMonthlyAmount = Long.valueOf(Objects.requireNonNull(snapshot.getValue()).toString());
+                            updatePaymentMap.put("Monthly Amount",currentMonthlyAmount+intAmount);
+
+                        } else {
+                            Long currentMonthlyAmount= Long.valueOf(0);
+                            updatePaymentMap.put("Monthly Amount",currentMonthlyAmount+intAmount);
+                        }
+                        collectionRef.child(infoDate.substring(6)).child(infoDate.substring(3,5)).updateChildren(updatePaymentMap);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+    }
+
+    void paymentPlaceCollection(String amount){
+        long intAmount = Long.parseLong(amount);
+        DatabaseReference collectionRef = FirebaseDatabase.getInstance().getReference().child("Place Collection");
+
+        //Daily Payment for individual place
+        collectionRef.child(placeId).child(infoDate.substring(6)).child(infoDate.substring(3,5)).child(infoDate)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        HashMap<String,Object> updatePaymentMap = new HashMap<>();
+                        Log.d("tiit", "onDataChange: ");
+                        if(snapshot.exists()){
+                            Long currentDailyAmount = Long.valueOf(Objects.requireNonNull(snapshot.getValue()).toString());
+                            updatePaymentMap.put(infoDate,currentDailyAmount+intAmount);
+
+                        } else {
+                            Long currentDailyAmount= Long.valueOf(0);
+                            updatePaymentMap.put(infoDate,currentDailyAmount+intAmount);
+                        }
+                        collectionRef.child(placeId).child(infoDate.substring(6)).child(infoDate.substring(3,5)).updateChildren(updatePaymentMap);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+        //Monthly Payment
+        collectionRef.child(placeId).child(infoDate.substring(6)).child(infoDate.substring(3,5)).child("Monthly Amount")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        HashMap<String,Object> updatePaymentMap = new HashMap<>();
+                        Log.d("tiit", "onDataChange: ");
+                        if(snapshot.exists()){
+                            Long currentMonthlyAmount = Long.valueOf(Objects.requireNonNull(snapshot.getValue()).toString());
+                            updatePaymentMap.put("Monthly Amount",currentMonthlyAmount+intAmount);
+
+                        } else {
+                            Long currentMonthlyAmount= Long.valueOf(0);
+                            updatePaymentMap.put("Monthly Amount",currentMonthlyAmount+intAmount);
+                        }
+                        collectionRef.child(placeId).child(infoDate.substring(6)).child(infoDate.substring(3,5)).updateChildren(updatePaymentMap);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    void deletePaymentCollection(String amount){
+        long intAmount = Long.parseLong(amount);
+        DatabaseReference collectionRef = FirebaseDatabase.getInstance().getReference().child("Collection");
+
+        //Daily Payment
+        collectionRef.child(infoDate.substring(6)).child(infoDate.substring(3,5)).child(infoDate)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        HashMap<String,Object> updatePaymentMap = new HashMap<>();
+                        Log.d("tiit", "onDataChange: ");
+                        if(snapshot.exists()){
+                            Long currentDailyAmount = Long.valueOf(Objects.requireNonNull(snapshot.getValue()).toString());
+                            updatePaymentMap.put(infoDate,currentDailyAmount-intAmount);
+                            collectionRef.child(infoDate.substring(6)).child(infoDate.substring(3,5)).updateChildren(updatePaymentMap);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+        //Monthly Payment
+        collectionRef.child(infoDate.substring(6)).child(infoDate.substring(3,5)).child("Monthly Amount")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        HashMap<String,Object> updatePaymentMap = new HashMap<>();
+                        Log.d("tiit", "onDataChange: ");
+                        if(snapshot.exists()){
+                            Long currentMonthlyAmount = Long.valueOf(Objects.requireNonNull(snapshot.getValue()).toString());
+                            updatePaymentMap.put("Monthly Amount",currentMonthlyAmount-intAmount);
+                            collectionRef.child(infoDate.substring(6)).child(infoDate.substring(3,5)).updateChildren(updatePaymentMap);
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    void deletePaymentPlaceCollection(String amount){
+        long intAmount = Long.parseLong(amount);
+        DatabaseReference collectionRef = FirebaseDatabase.getInstance().getReference().child("Place Collection");
+
+        //Daily Payment for individual place
+        collectionRef.child(placeId).child(infoDate.substring(6)).child(infoDate.substring(3,5)).child(infoDate)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        HashMap<String,Object> updatePaymentMap = new HashMap<>();
+                        Log.d("tiit", "onDataChange: ");
+                        if(snapshot.exists()){
+                            Long currentDailyAmount = Long.valueOf(Objects.requireNonNull(snapshot.getValue()).toString());
+                            updatePaymentMap.put(infoDate,currentDailyAmount-intAmount);
+                            collectionRef.child(placeId).child(infoDate.substring(6)).child(infoDate.substring(3,5)).updateChildren(updatePaymentMap);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+        //Monthly Payment
+        collectionRef.child(placeId).child(infoDate.substring(6)).child(infoDate.substring(3,5)).child("Monthly Amount")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        HashMap<String,Object> updatePaymentMap = new HashMap<>();
+                        Log.d("tiit", "onDataChange: ");
+                        if(snapshot.exists()){
+                            Long currentMonthlyAmount = Long.valueOf(Objects.requireNonNull(snapshot.getValue()).toString());
+                            updatePaymentMap.put("Monthly Amount",currentMonthlyAmount-intAmount);
+                            collectionRef.child(placeId).child(infoDate.substring(6)).child(infoDate.substring(3,5)).updateChildren(updatePaymentMap);
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 }
