@@ -6,10 +6,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,6 +30,7 @@ public class DepositLogBook extends AppCompatActivity {
     DepositLogBookAdapter depositLogBookAdapter;
     String placeId,infoDate;
     ImageView CalenderIcon;
+    EditText depositSearchBar;
     int year,month,day,a,b,c;
 
     @Override
@@ -34,6 +39,26 @@ public class DepositLogBook extends AppCompatActivity {
         setContentView(R.layout.activity_deposite_log_book);
 
         placeId = getIntent().getExtras().getString("id");
+        infoDate = todayDateFormatter("dd-MM-YYYY");
+
+        depositSearchBar = findViewById(R.id.depositLogBookSearchBar);
+        depositSearchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String text = charSequence.toString().toLowerCase();
+                setDepositSearchBar(text,infoDate,placeId);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
 
 
@@ -44,7 +69,7 @@ public class DepositLogBook extends AppCompatActivity {
          day = c.get(Calendar.DAY_OF_MONTH);
 
 
-        infoDate = todayDateFormatter("dd-MM-YYYY");
+
 
 
         depositDataRv = findViewById(R.id.depositLogBook_RV);
@@ -106,5 +131,24 @@ public class DepositLogBook extends AppCompatActivity {
 
         Log.d("kiki", "onDateSet1: "+day+year+month);
         datePickerDialog.show();
+    }
+
+    void setDepositSearchBar(String text,String infoDate,String placeId){
+        try{
+            options = new FirebaseRecyclerOptions.Builder<addMemberModal>()
+                    .setQuery(FirebaseDatabase.getInstance().getReference("MemberByPlace")
+                            .child(placeId).orderByChild("memberNameLowercase")
+                            .startAt(text)
+                            .endAt(text+"\uf8ff"), addMemberModal.class)
+                    .build();
+
+            depositLogBookAdapter = new DepositLogBookAdapter(options,placeId,infoDate);
+            depositDataRv.setAdapter(depositLogBookAdapter);
+            depositLogBookAdapter.startListening();
+
+        }catch (Exception e){
+            Toast.makeText(DepositLogBook.this, "Error" +e.getMessage(), Toast.LENGTH_SHORT).show();
+
+        }
     }
 }

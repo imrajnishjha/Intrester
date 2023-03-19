@@ -42,7 +42,8 @@ public class CreatePlace extends AppCompatActivity {
     FirebaseRecyclerOptions<CreatePlaceModel> options;
     TextView addPlaceBtn;
     EditText placeName, placeId;
-    ImageView placeIcon;
+    ImageView placeIcon,placeBackBtn;
+
     private final DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
    // static StorageReference storageRef = FirebaseStorage.getInstance().getReference("Place Picture/");
 
@@ -53,6 +54,9 @@ public class CreatePlace extends AppCompatActivity {
 
         createPlaceBtn = findViewById(R.id.create_place_btn);
         placeRv = findViewById(R.id.create_place_Rv);
+
+        placeBackBtn = findViewById(R.id.create_place_back_arrow);
+        placeBackBtn.setOnClickListener(view -> finish());
 
         //RecycleView Setup
         placeRv.setLayoutManager(new LinearLayoutManager(this));
@@ -124,6 +128,7 @@ public class CreatePlace extends AppCompatActivity {
                 } else{
                     HashMap<String,Object> placeMap = new HashMap<>();
                     placeMap.put("place",placeName.getText().toString());
+                    placeMap.put("placeLowerCase",placeName.getText().toString().toLowerCase());
                     dbRef.child("Place").child(placeId.getText().toString()).updateChildren(placeMap)
                             .addOnCompleteListener(task->{
                                 if(task.isSuccessful()){

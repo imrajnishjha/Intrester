@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,12 +37,12 @@ public class UserData extends AppCompatActivity {
     Spinner spinner;
     Boolean plan = false;
     String amPlan = "B", dur="";
-    int memberCount = 0;
     String placeId;
     RecyclerView memberRv;
     addMemberViewHolder addMemberHolder;
     FirebaseRecyclerOptions<addMemberModal> options;
     Bundle extras;
+    EditText searchBar;
 
 
     private final DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
@@ -59,12 +61,48 @@ public class UserData extends AppCompatActivity {
 
         //RecycleView Setup
         memberRv = findViewById(R.id.member_RV);
+        searchBar = findViewById(R.id.userDataSearchBar);
 
         memberRv.setLayoutManager(new LinearLayoutManager(this));
 
 
 
         fetchFirebase();
+
+        //Member Search Setting
+        searchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String text = charSequence.toString().toLowerCase();
+                try{
+                    options = new FirebaseRecyclerOptions.Builder<addMemberModal>()
+                            .setQuery(FirebaseDatabase.getInstance().getReference("MemberByPlace")
+                                    .child(placeId).orderByChild("memberNameLowercase")
+                                    .startAt(text)
+                                    .endAt(text+"\uf8ff"), addMemberModal.class)
+                            .build();
+
+                    addMemberHolder = new addMemberViewHolder(options);
+                    memberRv.setAdapter(addMemberHolder);
+                    addMemberHolder.startListening();
+
+                }catch (Exception e){
+                    Toast.makeText(UserData.this, "Error" +e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,6 +244,7 @@ public class UserData extends AppCompatActivity {
             placeMap.put("plan",amPlan);
             placeMap.put("duration",dur);
             placeMap.put("placeId", placeId);
+            placeMap.put("memberNameLowercase",amMemberName.getText().toString().toLowerCase());
 
 
 
@@ -260,7 +299,7 @@ public class UserData extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 dur = parent.getItemAtPosition(position).toString();
-//                Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+
             }
 
             @Override

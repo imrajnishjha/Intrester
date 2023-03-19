@@ -11,6 +11,7 @@
         android:id="@+id/userDataSearchBar"
         android:layout_width="0dp"
         android:layout_height="48dp"
+        android:textColor="@color/black"
         android:drawableStart="@drawable/search_icon"
         android:padding="8dp"
         android:background="@drawable/button_shape"

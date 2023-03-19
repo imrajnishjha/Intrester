@@ -14,12 +14,18 @@ public class DepositLogPlace extends AppCompatActivity {
 
     RecyclerView duePlaceRv;
     CreatePlaceAdapter depositPlaceAdapter;
+    ImageView depositPlaceBackBtn;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deposite_log_place);
+
+        depositPlaceBackBtn = findViewById(R.id.deposit_log_place_back_arrow);
+        depositPlaceBackBtn.setOnClickListener(view -> finish());
+
+
         FirebaseRecyclerOptions<CreatePlaceModel> options = new FirebaseRecyclerOptions.Builder<CreatePlaceModel>()
                 .setQuery(FirebaseDatabase.getInstance().getReference("Place"), CreatePlaceModel.class)
                 .build();;

@@ -4,17 +4,23 @@ import static com.wormos.intrester.DepositLogBook.todayDateFormatter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +33,8 @@ import java.util.ArrayList;
 
 public class DueLogBook extends AppCompatActivity {
 
-    String selectedId="-1";
+    String selectedId="-1",selectedImg ="0",typeId="1";
+    MotionLayout dueLogMotionLayout;
     Spinner placeSpinner;
     ArrayList<String> spinnerList,placeIdList;
     ArrayAdapter<String> spinnerAdapter;
@@ -36,6 +43,8 @@ public class DueLogBook extends AppCompatActivity {
     TextView allTv,paidTv,dueTv;
     RecyclerView dueLogRv;
     DueLogBookAdapter dueLogBookAdapter;
+    ImageView dueLogSearchBtn;
+    EditText dueLogSearchBar;
 
 
     @Override
@@ -46,6 +55,13 @@ public class DueLogBook extends AppCompatActivity {
         allTv = findViewById(R.id.due_log_all_search);
         paidTv = findViewById(R.id.due_log_paid_search);
         dueTv = findViewById(R.id.due_log_due_search);
+
+        dueLogMotionLayout = findViewById(R.id.dueLog_motion_layout);
+
+
+        dueLogSearchBtn = findViewById(R.id.due_log_search_btn);
+        dueLogSearchBar = findViewById(R.id.due_log_search_bar);
+
 
         dueLogRv = findViewById(R.id.dueLogBook_RV);
         dueLogRv.setLayoutManager(new LinearLayoutManager(this));
@@ -107,6 +123,39 @@ public class DueLogBook extends AppCompatActivity {
             RvSelector(selectedId,"paid");
         });
 
+        //Search Bar
+        dueLogSearchBtn.setOnClickListener(view ->{
+            Log.d("img", "onCreate: ");
+            if(selectedImg.equals("0")){
+                dueLogSearchBtn.setImageResource(R.drawable.cancel);
+                selectedImg = "1";
+                dueLogMotionLayout.transitionToEnd();
+
+            } else {
+                dueLogSearchBtn.setImageResource(R.drawable.search_icon);
+                selectedImg = "0";
+                dueLogMotionLayout.transitionToStart();
+            }
+        });
+
+        dueLogSearchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                menuSelector(allTv,dueTv,paidTv);
+                setDueLogSearchBtn(selectedId,"all",charSequence.toString().toLowerCase());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
     }
 
     void menuSelector(TextView tv1, TextView tv2, TextView tv3){
@@ -127,5 +176,23 @@ public class DueLogBook extends AppCompatActivity {
         }
 
     }
+
+    void setDueLogSearchBtn(String placeId,String type,String text){
+        if(!placeId.equals("-1")){
+            String infoDate = todayDateFormatter("dd-MM-YYYY");
+            FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<addMemberModal>()
+                    .setQuery(FirebaseDatabase.getInstance().getReference("MemberByPlace").child(placeId)
+                            .orderByChild("memberNameLowercase")
+                            .startAt(text)
+                            .endAt(text+"\uf8ff"), addMemberModal.class)
+                    .build();
+            dueLogBookAdapter = new DueLogBookAdapter(options,placeId,infoDate,type);
+            dueLogRv.setAdapter(dueLogBookAdapter);
+            dueLogBookAdapter.startListening();
+        } else {
+            Toast.makeText(DueLogBook.this,"Select a Place",Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
 }

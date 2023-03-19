@@ -10,6 +10,7 @@
     <EditText
         android:id="@+id/depositLogBookSearchBar"
         android:layout_width="0dp"
+        android:textColor="@color/black"
         android:layout_height="48dp"
         android:drawableStart="@drawable/search_icon"
         android:padding="8dp"
