@@ -21,7 +21,7 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    CardView entryLog;
+    CardView entryLog,accountSummary;
     CardView clientDatabase,depositLogPlace,dueLogBook;
 
     TextView monthCollection,dayCollection;
@@ -46,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
         dueLogBook = findViewById(R.id.dashboard_due_logbook_Cv);
         dueLogBook.setOnClickListener(view -> startActivity(new Intent(this,DueLogBook.class)));
+
+        accountSummary= findViewById(R.id.dashboard_account_navigation);
+        accountSummary.setOnClickListener(view -> startActivity(new Intent(this,AccountSummary.class)));
 
 
 

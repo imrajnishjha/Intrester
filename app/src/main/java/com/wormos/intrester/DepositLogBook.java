@@ -31,7 +31,7 @@ public class DepositLogBook extends AppCompatActivity {
     String placeId,infoDate;
     ImageView CalenderIcon;
     EditText depositSearchBar;
-    int year,month,day,a,b,c;
+    int year,month,day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,12 +124,11 @@ public class DepositLogBook extends AppCompatActivity {
                         depositLogBookAdapter = new DepositLogBookAdapter(options,placeId,infoDate);
                         depositDataRv.setAdapter(depositLogBookAdapter);
                         depositLogBookAdapter.startListening();
-                        Log.d("kiki", "onDateSet: "+infoDate+a+b+c);
+
                     }
                 },
                 year, month, day);
 
-        Log.d("kiki", "onDateSet1: "+day+year+month);
         datePickerDialog.show();
     }
 

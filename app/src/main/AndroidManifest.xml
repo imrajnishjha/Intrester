@@ -12,6 +12,9 @@
         android:theme="@style/Theme.Intrester"
         tools:targetApi="31">
         <activity
+            android:name=".AccountSummary"
+            android:exported="false" />
+        <activity
             android:name=".DueLogBook"
             android:exported="false" />
         <activity

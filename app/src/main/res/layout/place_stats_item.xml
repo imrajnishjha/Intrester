@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/placeCardView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:cardCornerRadius="7dp"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="45dp"
+                android:id="@+id/placeDataImage"
+                app:cardCornerRadius="7dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp">
+
+
+                <TextView
+                    android:id="@+id/placeIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="A"
+                    android:layout_weight="10"
+                    android:textSize="16sp"
+                    android:background="@color/button_light"
+                    android:gravity="center"
+                    android:textColor="@color/light_teal"
+                    android:fontFamily="@font/poppins_semi_bold"/>
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/placeDataName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/different_black"
+                android:layout_marginTop="8dp"
+                android:textSize="12sp"
+                android:layout_toEndOf="@+id/placeDataImage"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="Aman Tiwari"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <TextView
+                android:id="@+id/placeDataId"
+                android:layout_below="@+id/placeDataName"
+                android:layout_toEndOf="@+id/placeDataImage"
+                android:layout_width="wrap_content"
+                android:textSize="12sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_grey"
+                android:text="6000/month"
+                android:fontFamily="@font/poppins_regular"/>
+
+            <TextView
+                android:id="@+id/placeDataTotalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textSize="12sp"
+                android:textColor="@color/different_black"
+                android:layout_marginTop="8dp"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="Total: 0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <TextView
+                android:id="@+id/placeDataDailyAmount"
+                android:layout_below="@+id/placeDataTotalAmount"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textSize="12sp"
+                android:layout_marginBottom="8dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_grey"
+                android:text="Today: 0"
+                android:fontFamily="@font/poppins_semi_bold"/>
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

@@ -35,10 +35,6 @@ public class CreatePlaceAdapter extends FirebaseRecyclerAdapter<CreatePlaceModel
     protected void onBindViewHolder(@NonNull placeViewHolder holder, int position, @NonNull CreatePlaceModel model) {
         Log.d("ucl", "onBindViewHolder: "+Due);
         holder.placeName.setText(model.getPlace());
-//        Glide.with(holder.placeImage.getContext())
-//                .load(model.getPurl())
-//                .error(R.drawable.wormos_logo)
-//                .into(holder.placeImage);
 
         String firstLetter = String.valueOf(model.getPlace().charAt(0));
         holder.placeImage.setText(firstLetter.toUpperCase());
